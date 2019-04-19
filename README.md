@@ -19,7 +19,11 @@ For example, the strategy for creating the OpenShift cluster is to create an Ubu
 
 This accounts for a total of 330GB. Adding additional 20GB for safety.
 
-Vagrant and Ansible must be installed on the Ubuntu host VM. Vagrant will be used to create the cluster machines and Ansible will be used to do pre-installation configuration. 
+
 
 ### procedure
+* Install Git on host machine. 'sudo apt-get install git'
+
+Vagrant and Ansible must be installed on the Ubuntu host VM. Vagrant will be used to create the cluster machines and Ansible will be used to do pre-installation configuration. 
+
 procedure found on RHEL openshift website
