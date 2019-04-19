@@ -21,23 +21,15 @@ Vagrant.configure("2") do |config|
       nodeconfig.vm.hostname = node[:hostname]
       nodeconfig.vm.network :private_network, ip: node[:ip]
       nodeconfig.disksize.size = node[:disk]
-      nodeconfig.cpus = node[:cpus]
 
       memory = node[:ram] ? node[:ram] : 256;
+      cpus = node[:cpus] ? node[:cpus] : 1;
       nodeconfig.vm.provider :virtualbox do |vb|
-        vb.customize [
-          "modifyvm", :id,
-          "--cpuexecutioncap", "50",
-          "--memory", memory.to_s,
-        ]
+        vb.customize [ "modifyvm", :id, "--cpuexecutioncap", "50", "--memory", memory.to_s, "--cpus", cpus.to_s]
       end
     end
   end
 
-  config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file = "site.pp"
-    puppet.module_path = "puppet/modules"
-  end
+  
 end
 
