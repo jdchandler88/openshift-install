@@ -23,6 +23,11 @@ This accounts for a total of 330GB. Adding additional 20GB for safety.
 
 ### procedure
 * Install Git on host machine. 'sudo apt-get install git'
+* Install Virtualbox on host machine. 'sudo apt-get install virtualbox'
+* Install Vagrant on host machine. https://www.vagrantup.com/docs/installation/
+* Install Vagrant plugin, vagrant-disksize. 'vagrant plugin install vagrant-disksize'
+** Out of the box, Vagrant does not enable sizing of a disk. Vagrant boxes all come pre-sized. Note that this tends to lock Vagrantfiles into a Vagrant provider (e.g. Virtualbox)
+
 
 Vagrant and Ansible must be installed on the Ubuntu host VM. Vagrant will be used to create the cluster machines and Ansible will be used to do pre-installation configuration. 
 
