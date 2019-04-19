@@ -1,17 +1,17 @@
 domain   = 'chandler.com'
 
 nodes = [
-  { :hostname => 'master1', :ip => '192.168.0.42', :box => 'generic/rhel7' :ram => '16384', :disk => '40GB' :cpus => 4},
-  { :hostname => 'master2', :ip => '192.168.0.43', :box => 'generic/rhel7' :ram => '16384', :disk => '40GB' :cpus => 4 },
-  { :hostname => 'master3', :ip => '192.168.0.44', :box => 'generic/rhel7' :ram => '16384', :disk => '40GB' :cpus => 4 },
-  { :hostname => 'node1', :ip => '192.168.0.45', :box => 'generic/rhel7' :ram => '8192', :disk => '30GB' :cpus => 1 },
-  { :hostname => 'node2', :ip => '192.168.0.46', :box => 'generic/rhel7' :ram => '8192', :disk => '30GB' :cpus => 1 },
-  { :hostname => 'node3', :ip => '192.168.0.47', :box => 'generic/rhel7' :ram => '8192', :disk => '30GB' :cpus => 1 },
-  { :hostname => 'etcd1', :ip => '192.168.0.48', :box => 'generic/rhel7' :ram => '8192', :disk => '20GB' :cpus => 2 },
-  { :hostname => 'etcd2', :ip => '192.168.0.49', :box => 'generic/rhel7' :ram => '8192', :disk => '20GB' :cpus => 2 },
-  { :hostname => 'etcd3', :ip => '192.168.0.50', :box => 'generic/rhel7' :ram => '8192', :disk => '20GB' :cpus => 2 },
-  { :hostname => 'lb1', :ip => '192.168.0.51', :box => 'generic/rhel7' :ram => '8192', :disk => '20GB' :cpus => 1 },
-  { :hostname => 'lb2', :ip => '192.168.0.52', :box => 'generic/rhel7' :ram => '8192', :disk => '20GB' :cpus => 1 },
+  { :hostname => 'master1', :ip => '192.168.0.42', :box => 'generic/rhel7', :ram => '16384', :disk => '40GB', :cpus => 4},
+  { :hostname => 'master2', :ip => '192.168.0.43', :box => 'generic/rhel7', :ram => '16384', :disk => '40GB', :cpus => 4 },
+  { :hostname => 'master3', :ip => '192.168.0.44', :box => 'generic/rhel7', :ram => '16384', :disk => '40GB', :cpus => 4 },
+  { :hostname => 'node1', :ip => '192.168.0.45', :box => 'generic/rhel7', :ram => '8192', :disk => '30GB', :cpus => 1 },
+  { :hostname => 'node2', :ip => '192.168.0.46', :box => 'generic/rhel7', :ram => '8192', :disk => '30GB', :cpus => 1 },
+  { :hostname => 'node3', :ip => '192.168.0.47', :box => 'generic/rhel7', :ram => '8192', :disk => '30GB', :cpus => 1 },
+  { :hostname => 'etcd1', :ip => '192.168.0.48', :box => 'generic/rhel7', :ram => '8192', :disk => '20GB', :cpus => 2 },
+  { :hostname => 'etcd2', :ip => '192.168.0.49', :box => 'generic/rhel7', :ram => '8192', :disk => '20GB', :cpus => 2 },
+  { :hostname => 'etcd3', :ip => '192.168.0.50', :box => 'generic/rhel7', :ram => '8192', :disk => '20GB', :cpus => 2 },
+  { :hostname => 'lb1', :ip => '192.168.0.51', :box => 'generic/rhel7', :ram => '8192', :disk => '20GB', :cpus => 1 },
+  { :hostname => 'lb2', :ip => '192.168.0.52', :box => 'generic/rhel7', :ram => '8192', :disk => '20GB', :cpus => 1 },
 ]
 
 Vagrant.configure("2") do |config|
@@ -21,10 +21,9 @@ Vagrant.configure("2") do |config|
       nodeconfig.vm.hostname = node[:hostname]
       nodeconfig.vm.network :private_network, ip: node[:ip]
       nodeconfig.disksize.size = node[:disk]
-      nodeconfig.cpus = [node:cpus]
+      nodeconfig.cpus = node[:cpus]
 
       memory = node[:ram] ? node[:ram] : 256;
-      cpus = node[:cpus] ? node[:cpus] : 1;
       nodeconfig.vm.provider :virtualbox do |vb|
         vb.customize [
           "modifyvm", :id,
