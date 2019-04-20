@@ -6,12 +6,24 @@
 
     - name: Create user on remote machines
       user:
+        #TODO VARIABLIZE
         name: jdchand 
       become: yes
 
     - name: Set authorized key taken from file
       authorized_key:
+        #TODO VARIABLIZE
         user: jdchand
         state: present
-        key: "{{ lookup('file', '/tmp/.ssh/id_rsa.pub') }}"
+        #TODO VARIABLIZE
+        key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+      become: yes
+
+    - name: add openshift machines to no_proxy
+      lineinfile:
+        #TODO VARIABLIZE
+        path: /etc/environment
+        state: present
+        #TODO VARIABLIZE
+        line: 'no_proxy=.chandler.com,master1,master2,master3,172.30.0.1,.cluster.local,.svc,192.168.0.48,192.168.0.49,192.168.0.50'
       become: yes

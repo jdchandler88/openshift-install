@@ -6,14 +6,19 @@
 
     - name: create directory for storing ssh key
       file:
-        path: /tmp/.ssh
+        path: ~/.ssh
         owner: jdchand
         group: jdchand
         # when specifying mode using octal numbers, add a leading 0
-        mode: 0744
+        mode: 0774
         state: directory
 
     - name: Generate SSH key
-      shell: ssh-keygen -b 2048 -t rsa -f /tmp/.ssh/id_rsa -q -N ""
+      shell: ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N ""
       args:
-        creates: /tmp/.ssh/id_rsa
+        creates: ~/.ssh/id_rsa
+
+    - name: Register SSH key with machine
+      shell: ssh-add
+      args:
+        
