@@ -1,0 +1,19 @@
+---
+
+- name: prepare ansible host (localhost) for provisioning openshift machines
+  hosts: localhost
+  tasks:
+
+    - name: create directory for storing ssh key
+      file:
+        path: /tmp/.ssh
+        owner: jdchand
+        group: jdchand
+        # when specifying mode using octal numbers, add a leading 0
+        mode: 0744
+        state: directory
+
+    - name: Generate SSH key
+      shell: ssh-keygen -b 2048 -t rsa -f /tmp/.ssh/id_rsa -q -N ""
+      args:
+        creates: /tmp/.ssh/id_rsa

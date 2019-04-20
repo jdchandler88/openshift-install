@@ -1,0 +1,17 @@
+--- 
+
+- name: configure openshift hosts to have ssh keys for ansible configuration    
+  hosts: openshift
+  tasks:
+
+    - name: Create user on remote machines
+      user:
+        name: jdchand 
+      become: yes
+
+    - name: Set authorized key taken from file
+      authorized_key:
+        user: jdchand
+        state: present
+        key: "{{ lookup('file', '/tmp/.ssh/id_rsa.pub') }}"
+      become: yes
